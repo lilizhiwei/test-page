@@ -1,0 +1,185 @@
+<html>
+<head>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+
+<div>
+  <div>1:
+<div id="test-div">
+  <p id="test-js">javascript</p>
+  <p>Java</p>
+</div>
+      <div>---------------------------------------</div>
+  </div>
+
+  <div>2:
+<ul id="test-list">
+    <li>JavaScript</li>
+    <li>Swift</li>
+    <li>HTML</li>
+    <li>ANSIC</li>
+    <li>CSS</li>
+    <li>DirectX</li>
+</ul>
+      <div>---------------------------------------</div>
+  </div>
+
+  <div>3:
+<div class="test-selector">
+    <ul class="test-lang">
+        <li class="lang-javascript">JavaScript</li>
+        <li class="lang-python">Python</li>
+        <li class="lang-lua">Lua</li>
+    </ul>
+    <ol class="test-lang">
+        <li class="lang-swift">Swift</li>
+        <li class="lang-java">Java</li>
+        <li class="lang-c">C</li>
+    </ol>
+</div>
+<p><button type="submit3">查看答案</button></p>
+      <div>---------------------------------------</div>
+  </div>
+
+  <div>4:
+<form id="test-form" action="#0" onsubmit="return false;">
+    <p><label>Name: <input name="name"></label></p>
+    <p><label>Email: <input name="email"></label></p>
+    <p><label>Password: <input name="password" type="password"></label></p>
+    <p>Gender: <label><input name="gender" type="radio" value="m" checked> Male</label> <label><input name="gender" type="radio" value="f"> Female</label></p>
+    <p><label>City: <select name="city">
+    	<option value="BJ" selected>Beijing</option>
+    	<option value="SH">Shanghai</option>
+    	<option value="CD">Chengdu</option>
+    	<option value="XM">Xiamen</option>
+    </select></label></p>
+    <p><button type="submit">点我看答案</button></p>
+</form>
+      <div>---------------------------------------</div>
+  </div>
+
+  <div>5:
+<form id="test-register" action="#0" onsubmit="return false;">
+    <p id="test-error" style="color:red"></p>
+    <p>
+        用户名: <input type="text" id="username" name="username">
+    </p>
+    <p>
+        口令: <input type="password" id="password" name="password">
+    </p>
+    <p>
+        重复口令: <input type="password" id="password-2">
+    </p>
+    <p>
+        <button type="submit5">提交</button> <button type="reset">重置</button>
+    </p>
+</form>
+      <div>---------------------------------------</div>
+  </div>
+
+  <div>6:
+<form id="test-form6" action="#0" onsubmit="return false;">
+    <legend>请选择想要学习的编程语言：</legend>
+    <fieldset>
+        <p><button class="selectAll">全选</button>&nbsp&nbsp<button class="deselectAll">全不选</button></p> 
+        <p><label><input type="checkbox" name="lang" value="javascript"> JavaScript</label></p>
+        <p><label><input type="checkbox" name="lang" value="python"> Python</label></p>
+        <p><label><input type="checkbox" name="lang" value="ruby"> Ruby</label></p>
+        <p><label><input type="checkbox" name="lang" value="haskell"> Haskell</label></p>
+        <p><label><input type="checkbox" name="lang" value="scheme"> Scheme</label></p>
+        <p><button type="submit6">Submit</button></p>
+    </fieldset>
+</form>
+      <div>---------------------------------------</div>
+  </div>
+</div>
+
+</body>
+</html>
+
+
+<script>
+//1
+var p = $('#test-js');
+p.text('JavaScript');
+p.css('color', '#ff0000').css('fontWeight', 'bold');
+
+
+//2
+var m = $('#test-list>li');
+m[1].remove()
+m[3].remove()
+m[5].remove()
+
+//3
+var q = $('.test-selector');
+var w = $('.test-selector ul.test-lang');
+var e = $('.test-selector ol.test-lang');
+var a3 = $('[type="submit3"]');
+a3.on('click', function () {
+    alert('所有语言' + q.text());
+	alert('动态语言' + w.text());
+	alert('静态语言' + e.text());
+});
+
+//4
+var a4 = $('[type="submit"]');
+a4.on('click', function() {
+    function form2JsonString(formId) {
+            var paramArray = $('#' + formId).serializeArray();  
+             /*请求参数转json对象*/  
+             var jsonObj={};  
+              $(paramArray).each(function(){  
+                  jsonObj[this.name]=this.value;  
+              });  
+             console.log(jsonObj);  
+             // json对象再转换成json字符串
+             return JSON.stringify(jsonObj);
+        }
+    a1 = form2JsonString("test-form");
+    alert(a1);
+});
+
+//5
+var a5 = $('[type="submit5"]');
+a5.on('click', function () {
+    m1 = $('#username').val();
+    m2 = $('#password').val();
+    m3 = $('#password-2').val();
+	reg1=/^[a-zA-Z0-9]{3,10}$/;
+	reg2=/^.{6,20}$/;     
+	if(!reg1.test(m1)){    
+	    alert("对不起，用户名不符合格式!");  
+	}else if(!reg2.test(m2)){    
+	    alert("对不起，密码不符合格式!");
+	}else if(m2 != m3){    
+	    alert("对不起，两次密码不一致!");
+	}else{
+		alert('成功')
+	}
+});
+
+//6
+function setAll() {
+    var loves = document.getElementsByName("lang");
+    for (var i = 0; i < loves.length; i++) {
+        loves[i].checked = true;
+    }
+}
+function setNo() {
+    var loves = document.getElementsByName("lang");
+    for (var i = 0; i < loves.length; i++) {
+        loves[i].checked = false;
+    }
+}
+var a6 = $('.selectAll');
+a6.on('click', function () {
+    setAll();
+});
+var a7 = $('.deselectAll');
+a7.on('click', function () {
+    setNo();
+});
+</script>
+
